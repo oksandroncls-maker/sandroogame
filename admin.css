@@ -1,0 +1,20 @@
+.admin-box p {
+    min-height: 20px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+#start:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+#logoutMember {
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 8px;
+    background: #8b2525;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
