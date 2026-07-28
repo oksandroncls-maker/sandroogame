@@ -1,152 +1,16 @@
-<!DOCTYPE html>
-<html lang="id">
+"use strict";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Sandro Game V6</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="admin.css">
-</head>
+const express = require("express");
+const path = require("path");
 
-<body>
-    <div id="sky">
-        <div id="moon"></div>
-        <div id="mountains"></div>
-        <div id="ground"></div>
-    </div>
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-    <div id="gameTitle">SANDRO GAME</div>
-    <div id="score">Score : 0</div>
-    <div id="onlinePlayers">Pemain online: 0/20</div>
-    <div id="levelUp">LEVEL UP!</div>
-    <div id="p">🧍</div>
+app.use(express.static(__dirname));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
-    <div id="memberLogin" class="admin-modal active">
-        <div class="admin-box">
-            <h2 id="memberFormTitle">Login Member</h2>
-
-            <input id="memberUsername"
-                type="text"
-                maxlength="20"
-                placeholder="Username"
-                autocomplete="username">
-
-            <input id="memberPassword"
-                type="password"
-                maxlength="100"
-                placeholder="Password"
-                autocomplete="current-password">
-
-            <button id="loginMember">LOGIN MEMBER</button>
-            <button id="registerMember" class="secondary">
-                BUAT AKUN MEMBER
-            </button>
-
-            <p id="memberMessage"></p>
-        </div>
-    </div>
-
-    <div id="menu">
-        <h1>SANDRO GAME</h1>
-        <p>Pilih level awal 1 - 30</p>
-
-        <select id="levelSelect">
-            <option value="1">Level 1</option>
-            <option value="2">Level 2</option>
-            <option value="3">Level 3</option>
-            <option value="4">Level 4</option>
-            <option value="5">Level 5</option>
-            <option value="6">Level 6</option>
-            <option value="7">Level 7</option>
-            <option value="8">Level 8</option>
-            <option value="9">Level 9</option>
-            <option value="10">Level 10</option>
-            <option value="11">Level 11</option>
-            <option value="12">Level 12</option>
-            <option value="13">Level 13</option>
-            <option value="14">Level 14</option>
-            <option value="15">Level 15</option>
-            <option value="16">Level 16</option>
-            <option value="17">Level 17</option>
-            <option value="18">Level 18</option>
-            <option value="19">Level 19</option>
-            <option value="20">Level 20</option>
-            <option value="21">Level 21</option>
-            <option value="22">Level 22</option>
-            <option value="23">Level 23</option>
-            <option value="24">Level 24</option>
-            <option value="25">Level 25</option>
-            <option value="26">Level 26</option>
-            <option value="27">Level 27</option>
-            <option value="28">Level 28</option>
-            <option value="29">Level 29</option>
-            <option value="30">Level 30</option>
-        </select>
-
-        <button id="start" disabled>▶ START</button>
-        <button id="openAdmin" type="button">🔐 LOGIN ADMIN</button>
-        <button id="logoutMember" type="button">LOGOUT MEMBER</button>
-        <p id="capacityMessage"></p>
-    </div>
-
-    <div id="over">
-        <h1>GAME OVER</h1>
-        <p>Game selesai. Pilih aksi di bawah.</p>
-        <button id="restart">🔄 MULAI ULANG</button>
-        <button id="pickLevel">📌 PILIH LEVEL</button>
-    </div>
-
-    <div id="adminLogin" class="admin-modal">
-        <div class="admin-box">
-            <h2>Login Admin</h2>
-
-            <input id="adminUsername"
-                type="text"
-                placeholder="Username admin"
-                autocomplete="username">
-
-            <input id="adminPassword"
-                type="password"
-                placeholder="Password admin"
-                autocomplete="current-password">
-
-            <button id="loginAdmin">LOGIN ADMIN</button>
-            <button id="closeAdminLogin" class="secondary">TUTUP</button>
-
-            <p id="loginMessage"></p>
-        </div>
-    </div>
-
-    <div id="adminPanel" class="admin-modal">
-        <div class="admin-box">
-            <h2>Pengaturan Khusus Admin</h2>
-
-            <label for="runningText">Teks running</label>
-            <input id="runningText" type="text" maxlength="60">
-
-            <label for="runningEffect">Efek teks</label>
-            <select id="runningEffect">
-                <option value="rgb">RGB</option>
-                <option value="glow">Glow</option>
-                <option value="none">Tanpa efek</option>
-            </select>
-
-            <button id="saveSettings">SIMPAN PENGATURAN</button>
-            <button id="logoutAdmin" class="secondary">
-                LOGOUT ADMIN
-            </button>
-
-            <p id="adminMessage"></p>
-        </div>
-    </div>
-
-    <button id="l">◀</button>
-    <button id="r">▶</button>
-
-    <script src="script.js"></script>
-    <script src="member.js"></script>
-    <script src="admin.js"></script>
-</body>
-
-</html>
+app.listen(PORT, () => {
+    console.log(`Server berjalan di port ${PORT}`);
+});
