@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandro Game V6</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <div id="sky">
+        <div id="moon"></div>
+        <div id="mountains"></div>
+        <div id="ground"></div>
+    </div>
+
+    <div id="gameTitle">SANDRO GAME</div>
+    <div id="score">Score : 0</div>
+    <div id="onlinePlayers">Pemain online: 0/20</div>
+    <div id="levelUp">LEVEL UP!</div>
+    <div id="p">🧍</div>
+
+    <div id="memberLogin" class="admin-modal active">
+        <div class="admin-box">
+            <h2 id="authTitle">Masuk Sandro Game</h2>
+
+            <select id="authRole">
+                <option value="member">Member</option>
+                <option value="admin">Admin</option>
+            </select>
+
+            <input id="memberUsername"
+                type="text"
+                maxlength="20"
+                placeholder="Username"
+                autocomplete="username">
+
+            <input id="memberPassword"
+                type="password"
+                maxlength="100"
+                placeholder="Password"
+                autocomplete="current-password">
+
+            <button id="loginMember">MASUK</button>
+            <button id="registerMember" class="secondary">BUAT AKUN</button>
+
+            <p id="memberMessage"></p>
+        </div>
+    </div>
+
+    <div id="menu">
+        <h1>SANDRO GAME</h1>
+        <p>Pilih level awal 1 - 30</p>
+
+        <select id="levelSelect">
+            ${Array.from({ length: 30 }, (_, i) =>
+                `<option value="${i + 1}">Level ${i + 1}</option>`
+            ).join("")}
+        </select>
+
+        <button id="start" disabled>▶ START</button>
+        <button id="openAdmin" type="button">🔐 LOGIN ADMIN</button>
+        <button id="logoutMember" type="button">LOGOUT MEMBER</button>
+        <p id="capacityMessage"></p>
+    </div>
+
+    <div id="over">
+        <h1>GAME OVER</h1>
+        <p>Game selesai. Pilih aksi di bawah.</p>
+        <button id="restart">🔄 MULAI ULANG</button>
+        <button id="pickLevel">📌 PILIH LEVEL</button>
+    </div>
+
+    <div id="adminPanel" class="admin-modal">
+        <div class="admin-box">
+            <h2>Pengaturan Khusus Admin</h2>
+
+            <label for="runningText">Teks running</label>
+            <input id="runningText" type="text" maxlength="60">
+
+            <label for="runningEffect">Efek teks</label>
+            <select id="runningEffect">
+                <option value="rgb">RGB</option>
+                <option value="glow">Glow</option>
+                <option value="none">Tanpa efek</option>
+            </select>
+
+            <button id="saveSettings">SIMPAN PENGATURAN</button>
+            <button id="logoutAdmin" class="secondary">LOGOUT ADMIN</button>
+
+            <p id="adminMessage"></p>
+        </div>
+    </div>
+
+    <button id="l">◀</button>
+    <button id="r">▶</button>
+
+    <script src="script.js"></script>
+    <script src="member.js"></script>
+    <script src="admin.js"></script>
+    <script src="highscore.js"></script>
+</body>
+
+</html>

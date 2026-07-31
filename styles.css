@@ -1,0 +1,325 @@
+/* ==========================================
+   SANDRO GAME V3
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+    background:#00142f;
+}
+
+#sky{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:linear-gradient(to bottom,#04173d 0%,#0b3b7a 60%,#5ca0ff 100%);
+}
+
+#moon{
+    position:absolute;
+    top:35px;
+    right:40px;
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#fff7b2;
+    box-shadow:0 0 25px white,0 0 50px white;
+}
+
+#mountains{
+    position:absolute;
+    left:0;
+    bottom:60px;
+    width:100%;
+    height:240px;
+    background:
+        linear-gradient(135deg,transparent 50%,#214d23 50%) left,
+        linear-gradient(-135deg,transparent 50%,#2d6632 50%) center,
+        linear-gradient(135deg,transparent 50%,#214d23 50%) right;
+    background-size:34% 100%;
+    background-repeat:no-repeat;
+}
+
+#ground{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:60px;
+    background:linear-gradient(#39c653,#21682f);
+    border-top:5px solid #8cff70;
+}
+
+.star{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:white;
+    box-shadow:0 0 8px currentColor,0 0 16px currentColor;
+    animation:twinkleColor 3s linear infinite;
+}
+
+@keyframes twinkleColor{
+    0%{
+        opacity:.25;
+        transform:scale(.7);
+        color:#ff4d4d;
+        background:#ff4d4d;
+    }
+    16%{
+        opacity:1;
+        transform:scale(1.15);
+        color:#ff9f1a;
+        background:#ff9f1a;
+    }
+    33%{
+        opacity:.45;
+        transform:scale(.85);
+        color:#fff34d;
+        background:#fff34d;
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.2);
+        color:#4dff88;
+        background:#4dff88;
+    }
+    66%{
+        opacity:.5;
+        transform:scale(.9);
+        color:#4ddcff;
+        background:#4ddcff;
+    }
+    83%{
+        opacity:1;
+        transform:scale(1.1);
+        color:#7a4dff;
+        background:#7a4dff;
+    }
+    100%{
+        opacity:.25;
+        transform:scale(.7);
+        color:#ff4dff;
+        background:#ff4dff;
+    }
+}
+
+.cloud{
+    position:absolute;
+    width:120px;
+    height:45px;
+    background:white;
+    border-radius:50px;
+    opacity:.8;
+}
+
+.cloud::before{
+    content:"";
+    position:absolute;
+    width:55px;
+    height:55px;
+    left:15px;
+    top:-18px;
+    background:white;
+    border-radius:50%;
+}
+
+.cloud::after{
+    content:"";
+    position:absolute;
+    width:65px;
+    height:65px;
+    right:12px;
+    top:-25px;
+    background:white;
+    border-radius:50%;
+}
+
+#gameTitle{
+    position:absolute;
+    top:25px;
+    left:-100%;
+    z-index:999;
+    white-space:nowrap;
+    font-size:48px;
+    font-weight:bold;
+    letter-spacing:5px;
+    animation:titleMove 14s linear infinite,titleFloat 2.5s ease-in-out infinite,rgbText 1.5s linear infinite;
+}
+
+@keyframes titleMove{
+    from{left:-100%;}
+    to{left:110%;}
+}
+
+@keyframes titleFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+}
+
+@keyframes rgbText{
+    0%{color:#ff0000;text-shadow:0 0 10px #ff0000,0 0 25px #ff0000;}
+    14%{color:#ff7a00;text-shadow:0 0 10px #ff7a00,0 0 25px #ff7a00;}
+    28%{color:#ffff00;text-shadow:0 0 10px #ffff00,0 0 25px #ffff00;}
+    42%{color:#00ff00;text-shadow:0 0 10px #00ff00,0 0 25px #00ff00;}
+    56%{color:#00ffff;text-shadow:0 0 10px #00ffff,0 0 25px #00ffff;}
+    70%{color:#0066ff;text-shadow:0 0 10px #0066ff,0 0 25px #0066ff;}
+    84%{color:#ff00ff;text-shadow:0 0 10px #ff00ff,0 0 25px #ff00ff;}
+    100%{color:#ff0000;text-shadow:0 0 10px #ff0000,0 0 25px #ff0000;}
+}
+
+#score{
+    position:absolute;
+    top:85px;
+    left:15px;
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+    text-shadow:0 0 10px cyan;
+    z-index:50;
+}
+
+#levelUp{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    color:#fff;
+    font-size:52px;
+    font-weight:bold;
+    z-index:60;
+    text-shadow:0 0 12px #00ffff,0 0 25px #00ffff;
+    opacity:0;
+    pointer-events:none;
+}
+
+#levelUp.show{
+    animation:levelUpAnim 1s ease-out;
+}
+
+@keyframes levelUpAnim{
+    0%{transform:translate(-50%,-50%) scale(0.2);opacity:0;}
+    20%{transform:translate(-50%,-50%) scale(1.3);opacity:1;}
+    70%{transform:translate(-50%,-50%) scale(1);opacity:1;}
+    100%{transform:translate(-50%,-50%) scale(1.6);opacity:0;}
+}
+
+#p{
+    position:absolute;
+    bottom:60px;
+    transform:translateX(-50%);
+    font-size:100px;
+    z-index:30;
+}
+
+.a{
+    position:absolute;
+    z-index:30;
+    text-shadow:0 0 8px red;
+}
+
+#menu,
+#over{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.5);
+    color:white;
+    z-index:1000;
+}
+
+#menu select{
+    margin:10px 0 20px;
+    padding:10px 14px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    background:#fff;
+    color:#000;
+}
+
+#over{
+    display:none;
+    text-shadow:0 0 12px #ff4d4d,0 0 28px #ff0000,0 0 45px #ff0000;
+    animation:gameOverGlow 1.2s ease-in-out infinite alternate;
+}
+
+#over h1{
+    font-size:42px;
+    margin-bottom:15px;
+    color:#fff;
+    text-shadow:0 0 10px #ff3333,0 0 25px #ff0000,0 0 40px #ff0000;
+    animation:gameOverTextGlow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes gameOverGlow{
+    from{background:rgba(0,0,0,.45);box-shadow:inset 0 0 30px rgba(255,0,0,.15);}
+    to{background:rgba(0,0,0,.65);box-shadow:inset 0 0 50px rgba(255,0,0,.35);}
+}
+
+@keyframes gameOverTextGlow{
+    from{text-shadow:0 0 10px #ff3333,0 0 25px #ff0000,0 0 40px #ff0000;transform:scale(1);}
+    to{text-shadow:0 0 16px #ff6666,0 0 35px #ff2222,0 0 60px #ff0000;transform:scale(1.03);}
+}
+
+#menu h1,
+#over h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+#menu p,
+#over p{
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+#menu button,
+#over button{
+    padding:14px 35px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:#00aaff;
+    color:white;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+#l,
+#r{
+    position:fixed;
+    bottom:25px;
+    width:95px;
+    height:95px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.25);
+    color:white;
+    font-size:38px;
+    backdrop-filter:blur(5px);
+    z-index:100;
+}
+
+#l{left:20px;}
+#r{right:20px;}
+
+#l:active,
+#r:active{
+    transform:scale(.92);
+    background:rgba(255,255,255,.45);
+}

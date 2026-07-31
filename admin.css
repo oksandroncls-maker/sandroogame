@@ -1,0 +1,108 @@
+.admin-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, .7);
+    z-index: 2000;
+}
+
+.admin-modal.active {
+    display: flex;
+}
+
+.admin-box {
+    width: min(100%, 390px);
+    padding: 25px;
+    border: 2px solid #00cfff;
+    border-radius: 18px;
+    background: rgba(8, 20, 48, .96);
+    box-shadow: 0 0 25px rgba(0, 207, 255, .6);
+    color: white;
+}
+
+.admin-box h2 {
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.admin-box input,
+.admin-box select {
+    width: 100%;
+    margin: 7px 0;
+    padding: 12px;
+    border: 0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.admin-box button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: 0;
+    border-radius: 8px;
+    background: #009fe3;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-box button.secondary {
+    background: #555;
+}
+
+.admin-box button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+.admin-box p {
+    min-height: 20px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+#start:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+#logoutMember {
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 8px;
+    background: #8b2525;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#gameTitle.effect-glow {
+    animation:
+        titleMove 14s linear infinite,
+        titleFloat 2.5s ease-in-out infinite,
+        glowText 1.5s ease-in-out infinite alternate;
+}
+
+#gameTitle.effect-none {
+    animation:
+        titleMove 14s linear infinite,
+        titleFloat 2.5s ease-in-out infinite;
+    color: white;
+    text-shadow: none;
+}
+
+@keyframes glowText {
+    from {
+        color: #fff;
+        text-shadow: 0 0 8px #00ffff;
+    }
+
+    to {
+        color: #8fffff;
+        text-shadow: 0 0 12px #00ffff, 0 0 30px #008cff;
+    }
+}
